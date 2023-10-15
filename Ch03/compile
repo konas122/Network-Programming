@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "compiling..."
+
+gcc endian_conv.c -g -o endian

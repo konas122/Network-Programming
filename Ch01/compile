@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "compiling..."
+
+gcc hello_server.c -g -o hserver
+
+gcc hello_client.c -g -o hclient
+
+if [ $? -eq 0 ]; then
+    chmod 744 hclient
+    chmod 744 hserver
+    echo -e "Success! \nrun:\n\t./hserver 9190\n\t./hclient 127.0.0.1 9190"   
+fi
+
