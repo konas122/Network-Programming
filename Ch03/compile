@@ -2,4 +2,10 @@
 
 echo "compiling..."
 
-gcc endian_conv.c -g -o endian
+gcc endian_conv.c -g -w -o endian
+
+if [ $? -eq 0 ]; then
+    chmod 744 endian
+    echo -e "\nSuccess! \nrun:\n\t./endian"
+fi
+
