@@ -1,4 +1,4 @@
-# `socket()`
+## `socket()`
 
 创建套接字
 
@@ -15,7 +15,7 @@ int socket(int domain, int type, int protocol);
 
 成功则返回文件描述符，失败则返回-1
 
-## 协议族
+### 协议族
 
 | domain | 协议族 |
 | --- | --- |

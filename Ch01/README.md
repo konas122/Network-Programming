@@ -1,5 +1,4 @@
-
-# `open()`
+## `open()`
 
 打开文件
 
@@ -27,7 +26,7 @@ int open(const char *path, int flag);
 | O_RDWR | 读写打开 |
 
 
-# `close()`
+## `close()`
 
 关闭文件
 
@@ -42,7 +41,7 @@ int close(int fd);
 
 成功时返回0，失败则返回-1
 
-# `write()`
+## `write()`
 
 将数据写入文件
 
@@ -59,7 +58,7 @@ ssize_t write(inf fd, const void* buf, size_t nbytes);
 
 成功时返回写入的字节数，失败则返回-1
 
-# `read()`
+## `read()`
 
 读取文件中的数据
 
