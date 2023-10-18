@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "compiling..."
+gcc echo_server.c -g -w -o eserver
+gcc echo_client.c -g -w -o eclient
+
+if [ $? -eq 0 ]; then
+    chmod 744 eserver
+    chmod 744 eclient
+    echo -e "\nSuccess! \nrun:\n\t./eserver 9190 \n\t./eclient 127.0.0.1 9190 \n\nrespectively in two terminals. "
+fi
