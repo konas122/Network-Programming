@@ -1,0 +1,12 @@
+#!/bin/bash
+
+gcc echo_client2.c -w -g -o eclient2
+gcc op_client.c -w -g -o opclient
+gcc op_server.c -w -g -o opserver
+
+if [ $? -eq 0 ]; then
+    chmod 744 eclient2
+    chmod 744 opclient
+    chmod 744 opserver
+    echo -e "\nSuccess! \nrun:\n\t./opserver 9190 \n\t./opclient 127.0.0.1 9190 \n\nrespectively in two terminals. "
+fi

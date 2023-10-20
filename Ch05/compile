@@ -1,8 +1,0 @@
-#!/bin/bash
-
-gcc echo_client2.c -w -g -o eclient2
-
-if [ $? -eq 0 ]; then
-    chmod 744 eclient2
-    echo -e "Success! \n"
-fi
