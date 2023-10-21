@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "compiling..."
+gcc uecho_server.c -g -w -o ueserver
+gcc uecho_client.c -g -w -o ueclient
+
+if [ $? -eq 0 ]; then
+    chmod 744 ueserver
+    chmod 744 ueclient
+    echo -e "\nSuccess! \nrun:\n\t./ueserver 9190 \n\t./ueclient 127.0.0.1 9190 \n\nrespectively in two terminals. "
+fi
