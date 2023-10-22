@@ -3,9 +3,11 @@
 echo "compiling..."
 gcc uecho_server.c -g -w -o ueserver
 gcc uecho_client.c -g -w -o ueclient
+gcc uecho_con_client.c -g -w -o ue_con_client
 
 if [ $? -eq 0 ]; then
     chmod 744 ueserver
     chmod 744 ueclient
-    echo -e "\nSuccess! \nrun:\n\t./ueserver 9190 \n\t./ueclient 127.0.0.1 9190 \n\nrespectively in two terminals. "
+    chmod 744 ue_con_client
+    echo -e "\nSuccess! \nrun:\n\t./ueserver 9190 \n\t./ueclient 127.0.0.1 9190 \n\t./ue_con_client 127.0.0.1 9190 \n\nrespectively in three terminals. "
 fi
