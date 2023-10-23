@@ -37,7 +37,7 @@ int accept(int sock, struct sockaddr *addr, socklen_t *addrlen);
 ```C
 #include <sys.socket.h>
 
-int connect(int sock, struct sockaddr *servaddr, socklen_t addrlen);
+int connect(int sock, struct sockaddr *addr, socklen_t addrlen);
 /**
  * sock:    服务器套接字的文件描述符
  * addr:    保存目标服务器端地址信息的变量地址值

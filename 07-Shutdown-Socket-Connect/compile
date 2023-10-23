@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "compiling..."
+gcc file_server.c -g -w -o fserver
+gcc file_client.c -g -w -o fclient
+
+if [ $? -eq 0 ]; then
+    chmod 744 fserver
+    chmod 744 fclient
+    echo -e "\nSuccess! \nrun:\n\t./fserver 9190 \n\t./fclient 127.0.0.1 9190 \n\nrespectively in two terminals. "
+fi
