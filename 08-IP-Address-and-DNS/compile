@@ -1,0 +1,8 @@
+#!/bin/bash
+
+gcc gethost.c -g -w -o gethost
+
+if [ $? -eq 0 ]; then
+    chmod 744 gethost
+    echo -e "\nSuccess \n"
+fi
