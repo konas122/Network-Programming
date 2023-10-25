@@ -1,8 +1,8 @@
 #!/bin/bash
 
-gcc gethost.c -g -w -o gethost
+gcc gethost_byname.c -g -w -o host_name
+gcc gethost_byaddr.c -g -w -o host_addr
 
 if [ $? -eq 0 ]; then
-    chmod 744 gethost
     echo -e "\nSuccess \n"
 fi

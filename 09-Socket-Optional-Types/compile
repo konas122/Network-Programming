@@ -1,0 +1,7 @@
+#!/bin/bash
+
+gcc sock_type.c -g -o socktype
+
+if [ $? -eq 0 ]; then
+    echo -e "\nSuccess!\n"
+fi
