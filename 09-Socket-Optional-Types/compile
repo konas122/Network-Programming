@@ -1,6 +1,9 @@
 #!/bin/bash
 
 gcc sock_type.c -g -o socktype
+gcc get_buf.c -g -o getbuff
+gcc set_buf.c -g -w -o setbuff
+gcc reuseaddr_eserver.c -g -o reuseaddr
 
 if [ $? -eq 0 ]; then
     echo -e "\nSuccess!\n"
