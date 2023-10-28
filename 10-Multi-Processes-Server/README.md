@@ -42,3 +42,63 @@ pid_t waitpid(pid_t pid, int *statloc, int options);
 
 成功则返回子进程`pid`（或0），失败则返回`-1`
 
+
+## 信号处理
+
+### `signal()`
+
+```C
+#include <signal.h>
+
+void (*signal(int signo, void (*func)(int)))(int);
+```
+
+为了在产生信号时调用，返回之前注册的函数指针
+
+返回类型为函数指针
+
+上述函数中，第一个参数为特殊情况信息，第二个参数为特殊情况下将要调用的函数指针。
+
+特殊情况：
+- `SIGNALRM`:   已到通过调用`alarm`函数注册的时间
+- `SIGINT`:     输入`CTRL+C`
+- `SIGCHLD`:    子进程终止
+
+
+### `alarm()`
+
+```C
+#include <unistd.h>
+
+unsigned int alarm(unsigned int second);
+```
+
+返回0或以秒为单位的距`SIGALRM`信号发生所剩时间
+
+
+### `sigaction()`
+
+```C
+#include <signal.h>
+
+int sigaction(int signo, const struct sigaction *act, struct sigaction *oldact);
+/**
+ * `signo`:     与`signal`函数相同
+ * `act`:       对应于第一个参数的信号处理函数信息
+ * `oldact`:    通过此参数获取之前注册的信号处理函数指针，若不需要则传递0
+*/
+```
+
+创建成功返回0，失败则返回`-1`
+
+
+#### `struct sigaction`
+
+```C
+struct sigaction
+{
+    void (*sa_handler)(int);    // 信号处理函数的指针
+    sigset_t sa_mask;
+    int sa_flags;
+};
+```
