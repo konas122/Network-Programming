@@ -29,6 +29,8 @@ pid_t wait(int *statloc);
 
 ### `waitpid()`
 
+`wait`函数会引起程序阻塞，还可以考虑调用`waitpid`函数，可以防止阻塞
+
 ```C
 #include <sys/wait.h>
 

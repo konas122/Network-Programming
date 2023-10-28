@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 void read_childproc(int sig) {
     pid_t pid;
     int status;
-    pid = waitpid(-1, &status, WNOHANG); // 此函数一次最多回收一个子进程
+    pid = waitpid(-1, &status, WNOHANG);    // 此函数一次最多回收一个子进程
     printf("removed proc id: %d \n", pid);
 }
 
