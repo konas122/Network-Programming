@@ -1,3 +1,15 @@
+## 设置文件描述符
+
+```C
+FD_ZERO(fd_set *fdset);             // 从`fdset`所有位初始化为0
+FD_SET(int fd, fd_set *fdset);      // 从`fdset`指向的变量中注册文件描述符`fd`的信息
+FD_CLR(int fd, fd_set *fdset);      // 从`fdset`指向的变量中清除文件描述符`fd`的信息
+FD_ISSET(int fd, fd_set *fdset);    // 若`fdset`指向的变量中包含文件描述符`fd`的信息，则返回“真”
+```
+
+上述函数中，`FD_ISSET`用于验证`select`函数的调用结果。
+
+
 ## 设置检查（监视）范围及超时
 
 ```C
