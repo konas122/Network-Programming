@@ -1,0 +1,9 @@
+#!/bin/bash
+
+gcc oob_send.c -g -o send
+gcc oob_recv.c -g -o recv
+
+if [ $? -eq 0 ]; then
+    echo "Success!"
+    echo -e "./send 127.0.0.1 9190 \n./recv 9190" 
+fi

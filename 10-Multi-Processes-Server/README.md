@@ -100,6 +100,7 @@ int sigaction(int signo, const struct sigaction *act, struct sigaction *oldact);
 struct sigaction
 {
     void (*sa_handler)(int);    // 信号处理函数的指针
+    // 现在我们主要是防止僵尸进程，以下两个成员变量初始化为0即可，可暂时不用管
     sigset_t sa_mask;
     int sa_flags;
 };

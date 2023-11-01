@@ -24,3 +24,5 @@ ssize_t recv(int sockfd, const void *buf, ssize_t nbytes, int flags);
 | `MSG_DONTWAIT` | 调用I/O函数不阻塞，用于使用非阻塞(Non-blocking)I/O | · | · |
 | `MSG_WAITALL` | 防止函数返回，直到接受全部请求的字节数 |   | · |
 
+
+`MSG_OOB`的真正意义在于督促数据接收对象尽快处理数据。这是紧急模式的全部内容，而且tcp“保持传输顺序”的传输特性依然成立。
