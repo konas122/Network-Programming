@@ -28,6 +28,8 @@ int select(int maxfd, fd_set *readset, fd_set *writeset, fd_set *exeption, const
 
 成功返回大于`0`的值，失败则返回`-1`，超时返回`0`
 
+`select`函数用来验证3种监视项的变化情况
+
 ```C
 struct timeval
 {
