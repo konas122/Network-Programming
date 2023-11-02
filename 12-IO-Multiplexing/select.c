@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     struct timeval timeout;
 
     FD_ZERO(&reads);    // 初始化`fd_set`变量
-    FD_SET(0, &reads);  // 文件描述符0对应的位设置为1
+    FD_SET(0, &reads);  // 文件描述符0对应的位设置为1（0号文件描述符是`stdin`）
 
     /*
     timeout.tv_sec = 5;
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
         }
         else {
             if (FD_ISSET(0, &temps)) {  // 查看结果
-                str_len = read(0, buf, BUF_SIZE);
+                str_len = read(0, buf, BUF_SIZE);   // 0号文件描述符是`stdin`
                 buf[str_len] = 0;
                 printf("message from console: %s", buf);
             }
