@@ -1,4 +1,4 @@
-## `send`&`recv`
+## `send` & `recv`
 
 ```C
 include <sys.socket.h>
@@ -26,3 +26,32 @@ ssize_t recv(int sockfd, const void *buf, ssize_t nbytes, int flags);
 
 
 `MSG_OOB`的真正意义在于督促数据接收对象尽快处理数据。这是紧急模式的全部内容，而且tcp“保持传输顺序”的传输特性依然成立。
+
+
+## `readv` & `writev`
+
+对数据进行整合传输及发送的函数。也就是说，`writev`可以将分散保存在多个缓冲区中的数据一并发送，通过`readv`函数可以由多个缓冲分别接收。
+
+```C
+#include <sys/uio.h>
+
+ssize_t writev(int filedes, const struct iovec *iov, int iovcnt);
+ssize_t readv(int filedes, const struct iovec *iov, int iovcnt);
+/**
+ * filedes: 表示数据传输对象的套接字文件描述符（或者像`read`函数那样，传递文件描述符或标准输出描述符）
+ * iov:     iovec结构体数组的地址值
+ * iovcnt:  第二个参数的数组长度
+*/
+```
+
+成功时返回发送的字节数，失败则返回-1
+
+**Example**: [example: writev.c](./writev.c) [example: readv.c](./readv.c) 
+
+```C
+struct iovec 
+{
+    void *iov_base; //缓冲地址
+    size_t iov_len; //缓冲大小
+};
+```
