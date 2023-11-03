@@ -1,0 +1,4 @@
+#/bin/bash
+
+gcc news_sender.c -g -o sender
+gcc news_receiver.c -g -o receiver

@@ -1,4 +1,16 @@
-## `getsockopt`
+# 套接字的多种可选项
+
+## 套接字的多种可选项
+
+套接字可选项分为`IPPROTO_IP`、`IPPROTO_TCP`、`SOL_SOCKET`三层，各层的含义为：
+1. `IPPROTO_IP`：IP 协议相关事项；
+2. `IPPROTO_TCP`：TCP 协议相关事项；
+3. `SOL_SOCKET`：套接字相关的通用可选项。
+
+<img src="./assets/01.png" style="zoom:80%;" />
+<img src="./assets/02.png" style="zoom:80%;" />
+
+## `getsockopt` & `setsockopt`
 
 ```C
 #include <sys/socket.h>
