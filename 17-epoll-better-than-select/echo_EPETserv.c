@@ -8,13 +8,14 @@
 #include <sys/socket.h>
 #include <sys/epoll.h>
 
-#define BUF_SIZE 4
+#define BUF_SIZE 4      // 为了验证边沿触发的工作方式，将缓冲设置`4`字节
 #define EPOLL_SIZE 50
+
 void setnonblockingmode(int fd);
 void error_handling(char *buf);
 
-int main(int argc, char *argv[])
-{
+
+int main(int argc, char *argv[]) {
 	int serv_sock, clnt_sock;
 	struct sockaddr_in serv_adr, clnt_adr;
 	socklen_t adr_sz;
@@ -49,32 +50,33 @@ int main(int argc, char *argv[])
     event.data.fd = serv_sock;
     epoll_ctl(epfd, EPOLL_CTL_ADD, serv_sock, &event);
 
-    while (1)
-    {
+    while (1) {
         event_cnt = epoll_wait(epfd, ep_events, EPOLL_SIZE, -1);
-        if (event_cnt == -1)
-        {
+        if (event_cnt == -1) {
             puts("epoll_wait() error");
             break;
         }
 
         puts("return epoll_wait");
-        for (i = 0; i < event_cnt; i++)
-        {
-            if (ep_events[i].data.fd == serv_sock)
-            {
+        for (i = 0; i < event_cnt; i++) {
+            if (ep_events[i].data.fd == serv_sock) {
                 adr_sz = sizeof(clnt_adr);
                 clnt_sock = accept(serv_sock, (struct sockaddr *)&clnt_adr, &adr_sz);
+                // 将`accept`函数创建的套接字改为非阻塞模式
                 setnonblockingmode(clnt_sock);
+                // 向`EPOLLIN`添加`EPOLLET`标志，将套接字事件注册方式改为边沿触发
                 event.events = EPOLLIN | EPOLLET;
                 event.data.fd = clnt_sock;
+
                 epoll_ctl(epfd, EPOLL_CTL_ADD, clnt_sock, &event);
+
                 printf("connected client: %d \n", clnt_sock);
             }
-            else
-            {
-                while (1)
-                {
+            else {
+                // 之前的条件触发的代码中没有这个`while`循环。
+                // 在边沿触发中，发生事件时需要一次性读取完输入缓冲中所有数据，
+                // 因此需要循环调用`read`函数
+                while (1) {
                     str_len = read(ep_events[i].data.fd, buf, BUF_SIZE);
                     if (str_len == 0) // close request!
                     {
@@ -83,28 +85,30 @@ int main(int argc, char *argv[])
                         printf("closed client: %d \n", ep_events[i].data.fd);
                         break;
                     }
-                    else if (str_len < 0)
-                    {
+                    else if (str_len < 0) {
                         if (errno == EAGAIN)
+                            // `read`函数返回`-1`且`errno`值为`EAGAIN`时，
+                            // 意味着读取了输入缓冲中的全部数据，因此需要通过`break`语句跳出循环
                             break;
                     }
-                    else
-                    {
+                    else {
                         write(ep_events[i].data.fd, buf, str_len); // echo!
                     }
                 }
             }
         }
 	}
+
 	close(serv_sock);
 	close(epfd);
+
 	return 0;
 }
 
 
 void setnonblockingmode(int fd) {
     int flag = fcntl(fd, F_GETFL, 0);
-    fcntl(fd, F_SETFL, flag|O_NONBLOCK);
+    fcntl(fd, F_SETFL, flag | O_NONBLOCK);
 }
 
 
