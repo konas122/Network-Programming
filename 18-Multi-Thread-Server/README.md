@@ -38,9 +38,27 @@ int pthread_create(
 ```
 返回值：成功时返回`0`，失败时返回其他值。
 
-`restrict`关键字
+**`restrict`关键字**
+
 `restrict`是`C99`引入的一种类型限定符，它告诉编译器，对象已经被指针所引用，不能通过除该指针外所有其他直接或间接的方式修改该对象的内容。
 
 **注意**：由于`pthread`库不是`Linux`系统默认的库，链接时需要使用静态库`libpthread.a`，所以当使用了线程相关的函数后，在编译时要加`-lpthread`选项以声明需要连接线程库，这样才能调用头文件`pthread.h`中声明的函数。
 
 否则会报错：对`pthread_create`未定义的引用。
+
+## 控制线程的执行流
+
+[example](./thread2.c)
+
+```C
+#include <pthread.h>
+
+int pthread_join(pthread_t thread, void  **status);
+/*
+`thread`：  该参数值`ID`的线程终止后才会从该函数返回
+`status`:   保存线程的`main`函数返回值的指针变量地址值
+*/
+```
+返回值：成功时返回`0`，失败时返回其他值。
+
+调用`pthread_join`函数的进程或线程会*进入等待状态*，直到`ID`为`thread`（第一个参数）的线程终止。
