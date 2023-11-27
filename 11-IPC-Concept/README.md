@@ -12,3 +12,8 @@ int pipe(int filedes[2]);
 
 成功返回0，失败返回-1
 
+
+
+## 消息队列
+
+[Linux 消息队列](./MsgQueue.md)
