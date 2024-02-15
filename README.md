@@ -20,6 +20,8 @@
 
 ### [进程间通信](./11-IPC-Concept/README.md)
 
+#### [消息队列](./11-IPC-Concept/MsgQueue.md)
+
 ### [I/O复用](./12-IO-Multiplexing/README.md)
 
 ### [多种I/O函数](./13-Various-IO-Function/README.md)
