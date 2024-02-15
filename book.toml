@@ -1,0 +1,16 @@
+# https://giscus.app
+# https://github.com/badboy/mdbook-mermaid
+
+[book]
+title = "网络编程笔记"
+authors = ["konas122"]
+description = "网络编程笔记"
+language = "zh"
+multilingual = false
+src = "."
+
+[build]
+build-dir = "book"
+
+[output.html]
+git-repository-url = "https://github.com/konas122/Network-Programming"
